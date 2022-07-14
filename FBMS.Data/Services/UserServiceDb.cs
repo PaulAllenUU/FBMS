@@ -34,7 +34,7 @@ namespace FBMS.Data.Services
         }
 
         // Add a new User checking a User with same email does not exist
-        public User AddUser(string name, string email, string password, Role role)
+        public User AddUser(string firstName, string surName, string postCode, string email, string password, Role role)
         {     
             var existing = GetUserByEmail(email);
             if (existing != null)
@@ -44,7 +44,9 @@ namespace FBMS.Data.Services
 
             var user = new User
             {            
-                Name = name,
+                FirstName = firstName,
+                SurName = surName,
+                PostCode = postCode, 
                 Email = email,
                 Password = Hasher.CalculateHash(password), // can hash if required 
                 Role = role              
@@ -82,7 +84,9 @@ namespace FBMS.Data.Services
                 return null;
             }
             // update the details of the User retrieved and save
-            User.Name = updated.Name;
+            User.FirstName = updated.FirstName;
+            User.SurName = updated.SurName;
+            User.PostCode = updated.PostCode;
             User.Email = updated.Email;
             User.Password = Hasher.CalculateHash(updated.Password);  
             User.Role = updated.Role; 
@@ -117,6 +121,85 @@ namespace FBMS.Data.Services
             return (user != null && Hasher.ValidateHash(user.Password, password)) ? user : null;
             //return (user != null && user.Password == password ) ? user: null;
         }
-   
+
+        IList<Stock> IUserService.GetAllStock()
+        {
+            return ctx.Stock.ToList();
+        }
+
+        IList<Stock> IUserService.GetStockByExpiryDate()
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<Stock> IUserService.GetStockByDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<Stock> IUserService.GetNonFoodItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<Stock> IUserService.GetAllFoodItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        Stock IUserService.GetStockById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Stock IUserService.AddStock(string description, string colour, bool foodItem, DateTime expiryDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        Stock IUserService.UpdateStock(Stock stock)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.DeleteStock(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<Ingredient> IUserService.GetAllIngredients()
+        {
+            throw new NotImplementedException();
+        }
+
+        IList<Ingredient> IUserService.GetIngredientByDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        Ingredient IUserService.AddIngredient(string description, int StockId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Ingredient IUserService.GetIngredientById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Ingredient IUserService.UpdateIngredient(Ingredient ingredient)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.DeleteIngredient(int id, string description)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUserService.IsIngredientAvailableFromStock(int id, int stockId, string description)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

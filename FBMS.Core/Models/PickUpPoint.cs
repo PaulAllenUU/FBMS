@@ -1,7 +1,7 @@
 using System;
 namespace FBMS.Core.Models
 {
-    public class PickUp
+    public class PickUpPoint
     {
         public string StreetNumber { get; set; }
 

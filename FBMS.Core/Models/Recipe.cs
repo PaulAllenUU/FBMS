@@ -7,7 +7,7 @@ namespace FBMS.Core.Models
 
         public string Name { get; set; }
 
-        public string PreparatioTime { get; set; } 
+        public string PreparationTime { get; set; } 
 
         public string CookingTime { get; set; }
 
@@ -17,6 +17,6 @@ namespace FBMS.Core.Models
 
         public string MeatType { get; set; }
 
-        IList<RecipeIngredients> RecipeIngredients { get; set; } = new List<RecipeIngredients>();
+        public IList<RecipeIngredients> Recipes { get; set; } = new List<RecipeIngredients>();
     }
 }

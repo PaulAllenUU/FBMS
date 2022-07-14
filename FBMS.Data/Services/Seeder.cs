@@ -12,11 +12,11 @@ namespace FBMS.Data.Services
             svc.Initialise();
 
             // adding the users that are previously identified by the enumeration role
-            svc.AddUser("Administrator", "admin@mail.com", "admin", Role.admin);
-            svc.AddUser("Manager", "manager@mail.com", "volunteer", Role.manager);
-            svc.AddUser("Supplier", "supplier@mail.com", "supplier", Role.supplier);
-            svc.AddUser("Volunteer", "volunteer@mail.com", "volunteer", Role.volunteer);
-            svc.AddUser("Client", "client@mail.com", "guest", Role.client);    
+            svc.AddUser("Mr", "Admin", "BT49 0ST", "ceo@mail.com", "password", Role.admin);
+            svc.AddUser("Mr", "Manager", "BT56 7PO", "manager@mail.com","password", Role.manager);
+            svc.AddUser("Mr", "Supplier","BT90 5NM","supp@mail.com", "password1", Role.supplier);
+            svc.AddUser("Mr", "Volunteer", "BT90 3LM", "vol@mail.com", "password2", Role.volunteer);
+            svc.AddUser("Mr", "Client", "BT65 0OI", "client@mail.com", "password3", Role.client);    
         }
     }
 }

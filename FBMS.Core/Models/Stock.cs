@@ -7,6 +7,8 @@ namespace FBMS.Core.Models
 
         public string Description { get; set; }
 
+        public string Colour { get; set; }
+
         public bool FoodItem { get; set; }
 
         public DateTime ExpiryDate { get; set; }

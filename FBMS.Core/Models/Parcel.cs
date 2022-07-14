@@ -21,5 +21,7 @@ namespace FBMS.Core.Models
         public User Volunteer { get; set; }
 
         public Ticket Ticket { get; set; }
+
+        public int TicketId { get; set; }
     }
 }

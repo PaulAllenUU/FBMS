@@ -14,6 +14,25 @@ namespace FBMS.Data.Repositories
          // authentication store
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Ticket> Tickets { get; set; }
+
+        public DbSet<Stock> Stock { get; set; }
+
+        public DbSet<Parcel> Parcels { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<RecipeIngredients> RecipeIngredients { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+
+        public DbSet<DropOffPoint> DropOffPoints { get; set; }
+
+        public DbSet<PickUpPoint> PickUpPoints { get; set; }
+
+        public DbSet<ParcelRecipe> ParcelRecipes { get; set; }
+
+
+
         // Configure the context to use Specified database. We are using 
         // Sqlite database as it does not require any additional installations.
         // FBMS configured to allow use of MySql and Postgres
@@ -36,6 +55,8 @@ namespace FBMS.Data.Repositories
             Database.EnsureDeleted();
             Database.EnsureCreated();
         }
+
+
 
     }
 }

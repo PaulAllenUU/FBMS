@@ -10,5 +10,7 @@ namespace FBMS.Core.Models
         public int StockId { get; set; }
         public Stock Stock { get; set; }
 
+        public IList<RecipeIngredients> Recipes { get; set; } = new List<RecipeIngredients>();
+
     }
 }
