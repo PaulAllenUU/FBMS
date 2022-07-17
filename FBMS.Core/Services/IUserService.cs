@@ -109,13 +109,13 @@ namespace FBMS.Core.Services
 
         IList<RecipeIngredients> GetRecipeIngredientsWithSpecificQty(int quantity);
 
-        IList<RecipeIngredients> GetRecipeIngredientById(int id);
+        RecipeIngredients GetRecipeIngredientById(int id);
 
         RecipeIngredients AddIngredientToRecipeIngredients(int ingredientId, int recipeId, int ingredientQuantity);
 
         bool RemoveIngredientFromRecipeIngredients(int ingredientId, int recipeId);
 
-        RecipeIngredients UpdateRecipeIngredientQuantity(int recipeId, int ingredientId, int ingredientQuantity);
+        RecipeIngredients UpdateRecipeIngredientsQuantity(int recipeId, int ingredientId, int ingredientQuantity);
 
         //---------End of RecipeIngredient Management----------
 
@@ -131,17 +131,17 @@ namespace FBMS.Core.Services
 
         IList<Recipe> GetRecipesUnderSpecificTime(int cookingTimeInMins);
 
-        IList<Recipe> GetVegetarianRecipesUnderASpecificTime(bool vegetarian, string cookingTime);
+        IList<Recipe> GetVegetarianRecipesUnderASpecificTime(bool vegetarian, int cookingTimeMins);
 
-        IList<Recipe> GetCoeliacRecipesUnderASpecificTime(bool coeliacFriendly, string cookingTime);
+        IList<Recipe> GetCoeliacRecipesUnderASpecificTime(bool coeliacFriendly, int cookingTime);
 
-        IList<Recipe> GetCertainMeatUnderSpecificTime(string meatType, string cookingTime);
+        IList<Recipe> GetCertainMeatUnderSpecificTime(string meatType, int cookingTime);
 
         Recipe GetRecipeById(int id);
 
         Recipe GetRecipeByName(string name);
 
-        Recipe AddRecipe(string name, bool vegetarian, bool coeliacFriendly, string cookingTime, string meatType, int recipeIngredientsId);
+        Recipe AddRecipe(string name, bool vegetarian, bool coeliacFriendly, int cookingTimeMins, string meatType);
 
         Recipe UpDateRecipe(Recipe updated);
 

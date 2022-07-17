@@ -571,12 +571,12 @@ namespace FBMS.Data.Services
             return re;
         }
 
-        IList<Recipe> GetAllRecipes()
+        public IList<Recipe> GetAllRecipes()
         {
             return ctx.Recipes.ToList();
         }
 
-        IList<Recipe> GetVegetarianRecipes(bool vegetarian)
+        public IList<Recipe> GetVegetarianRecipes(bool vegetarian)
         {
             return ctx.Recipes.Where(x => x.Vegetarian == true).ToList();
         }
@@ -596,9 +596,9 @@ namespace FBMS.Data.Services
             return ctx.Recipes.Where(x => x.CookingTimeMins <= cookingTime).ToList();
         }
 
-        public IList<Recipe> GetVegetarianRecipesUnderASpecificTime(bool vegetarian, int CookingTimeMins)
+        public IList<Recipe> GetVegetarianRecipesUnderASpecificTime(bool vegetarian, int cookingTimeMins)
         {
-            return ctx.Recipes.Where(x => x.Vegetarian == true && x.CookingTimeMins < CookingTimeMins).ToList();
+            return ctx.Recipes.Where(x => x.Vegetarian == true && x.CookingTimeMins < cookingTimeMins).ToList();
         }
 
         public IList <Recipe> GetCoeliacRecipesUnderASpecificTime(bool coeliacFriendly, int cookingTimeMins)
@@ -621,7 +621,7 @@ namespace FBMS.Data.Services
             return ctx.Recipes.FirstOrDefault(x => x.Name == name);
         }
 
-        public Recipe AddRecipe(string name, bool vegetarian, bool coeliacFriendly, int cookingTimeMins, string meatType, int recipeIngredientsId)
+        public Recipe AddRecipe(string name, bool vegetarian, bool coeliacFriendly, int cookingTimeMins, string meatType)
         {
             //check the recipe does not exists using the recipe id
             var exists = GetRecipeByName(name);
@@ -636,7 +636,6 @@ namespace FBMS.Data.Services
                 CoeliacFriendly = coeliacFriendly,
                 CookingTimeMins = cookingTimeMins,
                 MeatType = meatType,
-                RecipeIngredientsId = recipeIngredientsId
 
             };
 
@@ -657,7 +656,6 @@ namespace FBMS.Data.Services
             recipe.Vegetarian = updated.Vegetarian;
             recipe.CoeliacFriendly = updated.CoeliacFriendly;
             recipe.MeatType = updated.MeatType;
-            recipe.RecipeIngredientsId = updated.RecipeIngredientsId;
 
             ctx.SaveChanges();
             return recipe;
