@@ -5,23 +5,18 @@ namespace FBMS.Core.Models
     {
         public int Id { get; set; }
 
-        public DateTime DateGiven { get; set; }
-
-        public string ItemsIncluded { get; set; }
-
-        public int Quantity { get; set; }
-
         public bool Collected { get; set; }
 
-        //foreign key from the user table to the parcel table 
-        public int UserId { get; set; }
+        //foreign key from the stockdrop table to the parcel table
+        public StockDrop StockDrop { get; set; }
 
-        public DropOffPoint DropOffPoint { get; set; }
-
-        public User Volunteer { get; set; }
+        //each Parcel will have 1 and only 1 StockDrop
+        public int StockDropId { get; set; }
 
         public Ticket Ticket { get; set; }
 
         public int TicketId { get; set; }
+
+        public IList<Stock> Stock { get; set; } = new List<Stock>();
     }
 }

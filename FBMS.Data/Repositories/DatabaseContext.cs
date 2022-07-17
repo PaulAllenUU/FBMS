@@ -25,18 +25,9 @@ namespace FBMS.Data.Repositories
         public DbSet<RecipeIngredients> RecipeIngredients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
 
-        public DbSet<DropOffPoint> DropOffPoints { get; set; }
+        public DbSet<StockDrop> StockDrops { get; set; }
 
-        public DbSet<PickUpPoint> PickUpPoints { get; set; }
-
-        public DbSet<ParcelRecipe> ParcelRecipes { get; set; }
-
-
-
-        // Configure the context to use Specified database. We are using 
-        // Sqlite database as it does not require any additional installations.
-        // FBMS configured to allow use of MySql and Postgres
-        // ideally connections strings should be stored in appsettings.json
+       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder                  

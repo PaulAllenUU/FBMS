@@ -3,7 +3,7 @@ namespace FBMS.Core.Models
 {
     // Each user split into different roles using enumeration
     //Different types of users will have different privileges in the application
-    public enum Role { admin, manager, volunteer, supplier, client }
+    public enum Role { admin, manager, volunteer, client }
 
     //principal entity
     public class User
@@ -23,6 +23,7 @@ namespace FBMS.Core.Models
         // User role within application
         public Role Role { get; set; }
 
+        public IList<DietaryRequirements> DietaryRequirements { get; set; } = new List<DietaryRequirements>();
         //each user of type client will have a list of tickets and parcels 
         public IList<Ticket> Tickets { get; set; } = new List<Ticket>();
 

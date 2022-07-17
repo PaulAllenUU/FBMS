@@ -23,12 +23,38 @@ namespace FBMS.Core.Services
 
         //-----------------End of user management----------
 
-        // ---------------- Begin Stock Management --------------
+        //---------------Begin Ticket Management------------
+        IList<Ticket> GetAllTickets();
+
+        IList<Ticket> GetTicketsWithDietaryRequirements(int id, int dietaryRequirementId);
+
+        IList<Ticket> GetTicketsCreatedOnCertainDay(DateTime createdOn);
+
+        IList<Ticket> GetTicketsForWhenParcelRequired(DateTime parcelRequired);
+
+        IList<Ticket> GetTicketsWithDietaryRequirementNeededOnSpecificDay(int dietaryRequirementId, DateTime parcelRequired);
+
+        Ticket GetTicketById(int id);
+
+        Ticket AddTicket(int noOfPeople, DateTime dateRequired, int userId, int dietaryRequirementId);
+
+        Ticket UpdateTicket(Ticket updated);
+
+        bool DeleteTicket(int id);
+
+        //---------------End of Ticket Management----------
+
+
+        // --------------Begin Stock Management --------
         IList<Stock> GetAllStock();
 
-        IList<Stock> GetStockByExpiryDate();
+        IList<Stock> SortStockByExpiryDate();
 
-        IList<Stock> GetStockByDescription();
+        IList<Stock> GetAllStockWithSpecificExpiry(DateOnly expiryDate);
+
+        IList<Stock> SortByExpiryDateReverse();
+
+        IList<Stock> GetStockByDescription(string description);
 
         IList<Stock> GetNonFoodItems();
 
@@ -36,7 +62,7 @@ namespace FBMS.Core.Services
 
         Stock GetStockById(int id);
         
-        Stock AddStock(string description, string colour, bool foodItem, DateTime expiryDate);
+        Stock AddStock(int id, string description, string colour, bool foodItem, DateOnly expiryDate);
 
         Stock UpdateStock (Stock stock);
 
@@ -47,17 +73,94 @@ namespace FBMS.Core.Services
         //----------------- Begin Ingredient Management--------
         IList<Ingredient> GetAllIngredients();
 
-        IList<Ingredient> GetIngredientByDescription();
+        IList<Ingredient> GetIngredientsByDescription(string description);
 
-        Ingredient AddIngredient(string description, int StockId);
+        Ingredient AddIngredient(int id, int stockId, string description);
 
-        Ingredient GetIngredientById(int id);
+        Ingredient GetIngredient(int id, int stockId);
 
         Ingredient UpdateIngredient(Ingredient ingredient);
 
-        bool DeleteIngredient(int id, string description);
+        bool DeleteIngredient(int id, int stockId, string description);
 
         bool IsIngredientAvailableFromStock(int id, int stockId, string description);
+        
+        //-------------End of Ingredient Management------------
+
+        //-------Begin DropOffPoint Management------------
+        IList<StockDrop> GetAllStockDrops();
+
+        StockDrop GetStockDropByPostCodeAndDate(string postCode, DateTime date);
+
+        IList<StockDrop> GetStockDropsForSpecificDate(DateTime date);
+
+        StockDrop AddStockDrop(int streetNumber, string streetName, DateTime date, string postCode, int parcelId);
+
+        StockDrop GetStockDropById(int id);
+
+        StockDrop UpdateStockDrop(StockDrop stockDrop);
+
+        bool DeleteStockDrop (int id);
+
+
+        //-------------Begin RecipeIngredientManagement (Intermediate Class)------
+
+        IList<RecipeIngredients> GetAllRecipeIngredients();
+
+        IList<RecipeIngredients> GetRecipeIngredientsWithSpecificQty(int quantity);
+
+        IList<RecipeIngredients> GetRecipeIngredientById(int id);
+
+        RecipeIngredients AddIngredientToRecipeIngredients(int ingredientId, int recipeId, int ingredientQuantity);
+
+        bool RemoveIngredientFromRecipeIngredients(int ingredientId, int recipeId);
+
+        RecipeIngredients UpdateRecipeIngredientQuantity(int recipeId, int ingredientId, int ingredientQuantity);
+
+        //---------End of RecipeIngredient Management----------
+
+
+        //-------------Begin Recipe Management------------
+        IList<Recipe> GetAllRecipes();
+
+        IList<Recipe> GetVegetarianRecipes(bool vegetarian);
+
+        IList<Recipe> GetCoeliacFriendlyRecipes(bool coeliacFriendly);
+
+        IList<Recipe> GetRecipesSpecifiedByMeatType(string meatType);
+
+        IList<Recipe> GetRecipesUnderSpecificTime(int cookingTimeInMins);
+
+        IList<Recipe> GetVegetarianRecipesUnderASpecificTime(bool vegetarian, string cookingTime);
+
+        IList<Recipe> GetCoeliacRecipesUnderASpecificTime(bool coeliacFriendly, string cookingTime);
+
+        IList<Recipe> GetCertainMeatUnderSpecificTime(string meatType, string cookingTime);
+
+        Recipe GetRecipeById(int id);
+
+        Recipe GetRecipeByName(string name);
+
+        Recipe AddRecipe(string name, bool vegetarian, bool coeliacFriendly, string cookingTime, string meatType, int recipeIngredientsId);
+
+        Recipe UpDateRecipe(Recipe updated);
+
+        bool DeleteRecipe(int id, string Name);
+
+        //----------------End of Recipe Management-----------
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 

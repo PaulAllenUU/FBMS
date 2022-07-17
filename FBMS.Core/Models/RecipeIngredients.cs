@@ -3,6 +3,9 @@ namespace FBMS.Core.Models
 {
     public class RecipeIngredients
     {
+        public int Id { get; set; }
+
+        public int IngredientQuantity { get; set; }
 
         public int RecipeId { get; set; }
 
@@ -12,8 +15,8 @@ namespace FBMS.Core.Models
 
         public Ingredient Ingredient { get; set; }
 
-        public int Quantity { get; set; }
-
+        //the recipeingredients class will always generate a list of recipes
+        //even when the list is empty the list will still exist
 
     }
 }

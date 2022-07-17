@@ -7,16 +7,14 @@ namespace FBMS.Core.Models
 
         public string Name { get; set; }
 
-        public string PreparationTime { get; set; } 
-
-        public string CookingTime { get; set; }
-
         public bool Vegetarian { get; set; }
 
         public bool CoeliacFriendly { get; set; }
 
+        public int CookingTimeMins { get; set; }
+
         public string MeatType { get; set; }
 
-        public IList<RecipeIngredients> Recipes { get; set; } = new List<RecipeIngredients>();
+        public IList<RecipeIngredients> RecipeIngredients { get; set; } = new List<RecipeIngredients>();
     }
 }
