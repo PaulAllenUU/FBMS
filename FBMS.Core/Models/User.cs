@@ -23,7 +23,10 @@ namespace FBMS.Core.Models
         // User role within application
         public Role Role { get; set; }
 
-        public IList<DietaryRequirements> DietaryRequirements { get; set; } = new List<DietaryRequirements>();
+        //M:N relationship between user and dietary requirements
+        //UserDietaryRequirements created as an intermediate class to bring the relation to 1:M
+        public IList<UserDietaryRequirements> UserDietaryRequirements { get; set; } = new List<UserDietaryRequirements>();
+
         //each user of type client will have a list of tickets and parcels 
         public IList<Ticket> Tickets { get; set; } = new List<Ticket>();
 

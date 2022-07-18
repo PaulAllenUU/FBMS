@@ -7,8 +7,6 @@ public class DietaryRequirements
 
     public string Description { get; set; }
 
-    public User User { get; set; }
-
-    public int UserId { get; set; }
+    IList<UserDietaryRequirements> UserDietaryRequirements { get; set; } = new List<UserDietaryRequirements>();
 
 }

@@ -14,6 +14,10 @@ namespace FBMS.Data.Repositories
          // authentication store
         public DbSet<User> Users { get; set; }
 
+        public DbSet<DietaryRequirements> DietaryRequirements { get; set;}
+
+        public DbSet<UserDietaryRequirements> UserDietaryRequirements { get; set ;}
+
         public DbSet<Ticket> Tickets { get; set; }
 
         public DbSet<Stock> Stock { get; set; }

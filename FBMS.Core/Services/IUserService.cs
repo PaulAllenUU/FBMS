@@ -149,32 +149,32 @@ namespace FBMS.Core.Services
 
         //----------------End of Recipe Management-----------
 
-    
+        //---------------Begin Dietary Requirements Management-----------
+
+        IList <DietaryRequirements> GetAllDietaryRequirements();
+
+        IList<DietaryRequirements> SortDietaryRequirementsByDescription();
+
+        DietaryRequirements GetDietaryRequirementById(int id);
+
+        DietaryRequirements GetDietaryRequirementByDescrption(string descpription);
+
+        DietaryRequirements AddDietaryRequirement(string description);
+
+        DietaryRequirements UpdateDietaryRequirement(DietaryRequirements updated);
+
+        bool DeleteDietaryRequirement(string descpription);
+
+        UserDietaryRequirements AddDietaryRequirementForUser(int userId, int dietaryRequirementId, string description);
 
 
+        UserDietaryRequirements GetUserDietaryRequirements(int id);
+
+        IList<DietaryRequirements> GetDietaryRequirementsUserHasNotYetDeclared(int id);
+
+        bool RemoveDietaryRequirementFromUser(int userId, int dietaryRequirementId);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-       
     }
     
 }

@@ -662,7 +662,7 @@ namespace FBMS.Data.Services
 
         }
 
-        bool IUserService.DeleteRecipe(int id, string Name)
+        public bool DeleteRecipe(int id, string Name)
         {
             //find the recipe first before deleting
             var recipe = GetRecipeById(id);
@@ -671,6 +671,132 @@ namespace FBMS.Data.Services
 
             var delete = ctx.Recipes.Remove(recipe);
 
+            ctx.SaveChanges();
+            return true;
+        }
+
+        public IList<DietaryRequirements> GetAllDietaryRequirements()
+        {
+            return ctx.DietaryRequirements.ToList();
+        }
+
+        public IList<DietaryRequirements> SortDietaryRequirementsByDescription()
+        {
+            return ctx.DietaryRequirements.OrderBy ( x => x.Description).ToList();
+        }
+
+        public DietaryRequirements GetDietaryRequirementById(int id)
+        {
+            return ctx.DietaryRequirements.FirstOrDefault( x => x.Id == id);
+        }
+
+        public DietaryRequirements GetDietaryRequirementByDescrption(string description)
+        {
+            return ctx.DietaryRequirements.FirstOrDefault ( x => x.Description == description);
+        }
+
+        public DietaryRequirements AddDietaryRequirement(string description)
+        {
+            //check that the dietary requirement does not exist already in the database
+            //using the method created above
+            var existing = GetDietaryRequirementByDescrption(description);
+
+            if (existing != null) return null;
+
+            var dietaryRequirement = new DietaryRequirements
+            {
+                Description = description
+            };
+
+            ctx.DietaryRequirements.Add(dietaryRequirement);
+            ctx.SaveChanges();
+            return dietaryRequirement;
+
+        }
+
+        public DietaryRequirements UpdateDietaryRequirement(DietaryRequirements updated)
+        {
+            //check to see if the dietary requirement exists in the database
+            var req = GetDietaryRequirementByDescrption(updated.Description);
+
+            //if it does not exist then return null
+            if (req == null) return null;
+
+            //if it does exist then update the dietary requirement with the description
+            req.Description = updated.Description;
+
+            ctx.SaveChanges();
+            return req;
+        }
+
+        public bool DeleteDietaryRequirement(string description)
+        {
+            //check the dietary requirement exists before it can be deleted
+            var dr = GetDietaryRequirementByDescrption(description);
+
+            //if it is null then return false as cannot be deleted
+            if ( dr == null) return false;
+
+            //if it is found then remove and save changes
+            ctx.DietaryRequirements.Remove(dr);
+            ctx.SaveChanges();
+            return true;
+
+        }
+
+        public UserDietaryRequirements AddDietaryRequirementForUser(int userId, int dietaryRequirementId, string description)
+        {
+            //check if this user already has this dietary requirement registed and if they do then return null
+            var dru = ctx.UserDietaryRequirements
+                        .FirstOrDefault(o => o.UserId == userId &&
+                                             o.DietaryRequirementsId == dietaryRequirementId);
+            
+            if (dru != null) return null;
+
+            //check that both the specific user and dietary requirement already exist in the database
+            var u = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            var d = ctx.DietaryRequirements.FirstOrDefault( d => d.Id == dietaryRequirementId);
+
+            //if either does not exist then return null because it cannot be added
+            if (u == null || d == null) return null;
+
+            var nudr = new UserDietaryRequirements{ UserId = u.Id, DietaryRequirementsId = d.Id, Description = description};
+
+            ctx.UserDietaryRequirements.Add(nudr);
+            ctx.SaveChanges();
+            return nudr;
+
+        }
+
+        public UserDietaryRequirements GetUserDietaryRequirements(int id)
+        {
+            return ctx.UserDietaryRequirements.FirstOrDefault(udr => udr.Id == id);
+        }
+
+        public IList<DietaryRequirements> GetDietaryRequirementsUserHasNotYetDeclared(int id)
+        {
+            //get the id of the user we are querying
+            var user = GetUser(id);
+
+            //get their current dietary requirements 
+            var udr = user.UserDietaryRequirements.ToList();
+
+            //get a list of all the dietary requirements in the database
+            var dietaryRequirements = ctx.DietaryRequirements.ToList();
+
+            //return only the only ones which do not match the above query
+            return dietaryRequirements.Where( dr => udr.Any(x => x.DietaryRequirementsId != dr.Id)).ToList();
+        }
+
+        public bool RemoveDietaryRequirementFromUser(int userId, int dietaryRequirementId)
+        {
+            var udr = ctx.UserDietaryRequirements.FirstOrDefault(
+                dr => dr.UserId == userId && dr.DietaryRequirementsId == dietaryRequirementId
+            );
+
+            if (udr == null) return false;
+
+            ctx.UserDietaryRequirements.Remove(udr);
             ctx.SaveChanges();
             return true;
         }
